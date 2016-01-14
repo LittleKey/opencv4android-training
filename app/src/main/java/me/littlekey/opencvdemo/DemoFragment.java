@@ -62,6 +62,10 @@ public class DemoFragment extends Fragment {
   @Override
   public void onResume() {
     super.onResume();
-    OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_1_0, getActivity(), mOpenCVCallback);
+    if (!OpenCVLoader.initDebug()) {
+      OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_1_0, getActivity(), mOpenCVCallback);
+    } else {
+      mOpenCVCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+    }
   }
 }
